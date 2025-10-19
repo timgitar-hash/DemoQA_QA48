@@ -4,6 +4,10 @@ import com.demoqa.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BrowserWindows extends BasePage {
 	public BrowserWindows(WebDriver driver) {
@@ -13,7 +17,17 @@ public class BrowserWindows extends BasePage {
 	@FindBy(id = "tabButton")
 	WebElement tabbutton;
 	public BrowserWindows switchToNewTab(int index) {
-		clickWithJS(tabbutton,0,500);
-		return this;
+		click(tabbutton);
+
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(index));
+        return this;
 	}
+
+    @FindBy(id = "sampleHeading")
+    WebElement sampleHeading;
+    public BrowserWindows verifyNewTabTitle(String text) {
+        Assert.assertTrue(shouldHaveText(sampleHeading,text,5));
+        return this;
+    }
 }
