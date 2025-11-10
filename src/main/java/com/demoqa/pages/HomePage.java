@@ -1,5 +1,6 @@
 package com.demoqa.pages;
 
+import com.demoqa.pages.elements.ButtonsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,20 @@ public class HomePage extends BasePage {
     WebElement widgets;
     public SidePanel getWidgets() {
         clickWithJS(widgets,0,500);
+        return new SidePanel(driver);
+    }
+
+    @FindBy(css = ".card:nth-child(5)")
+    WebElement interactions;
+    public SidePanel getInteractions() {
+        clickWithJS(interactions,0,500);
+        return new SidePanel(driver);
+    }
+
+    @FindBy(css = ".card:nth-child(1)")
+    WebElement elements;
+    public SidePanel getElements() {
+        clickWithJS(elements,0,500);
         return new SidePanel(driver);
     }
 }
